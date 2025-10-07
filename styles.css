@@ -1,0 +1,244 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f4f4;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
+    padding: 1rem;
+    position: relative;
+
+    img {
+        height: 30px;     
+        width: auto;
+        display: block;
+    }
+}
+
+/* Hide hamburger checkbox */
+.nav-toggle {
+    display: none;
+}
+
+/* Hamburger icon (Font Awesome) */
+.nav-hamburger {
+    display: none; /* hidden on desktop */
+    cursor: pointer;
+    padding: 8px;
+    font-size: 1.5rem;
+    color: #111;
+}
+
+/* Nav links container */
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Responsive: show hamburger and collapse nav on small screens */
+@media (max-width: 768px) {
+    .nav-hamburger {
+        display: flex; /* show hamburger */
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        gap: 0;
+        border-top: 1px solid black;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    .nav-links a {
+        padding: 1rem;
+        padding-left: 2rem;
+
+        width: 100%;
+        border-bottom: 1px solid #ddd;
+    }
+
+    /* Show menu when checkbox is checked */
+    .nav-toggle:checked ~ .nav-links {
+        max-height: 400px;
+    }
+}
+
+/* Hero area */
+#hero {
+    background-image: url('images/hero_img.jpg');
+    background-size: cover;        /* ensure the image fills the area */
+    background-repeat: no-repeat;
+    min-height: 85vh;              /* visible hero area even with no inner content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Ensure hero content sits above the background image */
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+/* Title box (keeps text readable over image) */
+.title-box {
+    display: inline-block;
+    background: rgba(255,255,255,0.95); /* white box with slight transparency */
+    color: #111;
+    padding: .4rem 0.8rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: clamp(1.25rem, 4vw, 3rem);
+}
+
+#menu {
+    margin: 2rem 0;
+}
+
+/* Container utility */
+.container{
+    padding: 2rem 1rem; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-table{ width:100%; border-collapse: collapse; margin-top:1rem; max-width: 1000px;}
+.menu-table th, .menu-table td{ padding: .6rem .8rem; border: 1px solid #ddd; text-align:left; }
+.menu-table thead{ background:#f8f8f8; }
+
+#gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gallery-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    overflow-x: auto;      /* enable horizontal scrolling */
+    overflow-y: hidden;    /* prevent vertical scrollbar */
+    max-height: 400px;
+    margin: 2rem auto;
+    gap: 1rem;
+    align-items: center;   /* vertically center slides */
+
+    img{
+        height: 400px;          /* fit the container height without overflowing */
+        width: auto;
+        object-fit: cover;
+        display: block;
+    }
+}
+
+#about {
+    margin: 0 auto 2rem auto;
+    padding: 0 1rem;
+    text-align: center;
+}
+
+#contact {
+    margin: 0 auto 2rem auto;
+    padding: 0 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    iframe {
+        width: 100%;
+        max-width: 600px;
+        height: 300px;
+        border: 0;
+        margin-top: 1rem;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    #contact-form {
+        display: flex;
+        flex-direction: column;
+        border: #111 solid 2px;
+        padding: 1rem;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: #fff;
+    padding: 2rem 1rem 1rem;
+    text-align: center;
+
+    .footer-content {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        flex-wrap: wrap;
+        max-width: 1000px;
+        margin: 0 auto 1rem;
+    }
+
+    .footer-section {
+        h3 {
+            margin-bottom: .5rem;
+            font-size: 1.1rem;
+        }
+
+        p {
+            margin: .3rem 0;
+            font-size: .95rem;
+        }
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+
+        a {
+            color: #fff;
+            text-decoration: underline;
+            font-size: .95rem;
+        }
+    }
+
+    .footer-copyright {
+        margin-top: 1.5rem;
+        font-size: .85rem;
+        color: #bbb;
+    }
+}
+
+

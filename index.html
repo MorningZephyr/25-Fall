@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Poke Bowl</title>
+</head>
+<body>
+    <nav>
+        <a class="nav-logo" href="#hero">
+          <img src="images/logo.png" alt="Poke Bowl logo">
+        </a>
+
+        <!-- Hamburger toggle (hidden checkbox) -->
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <label for="nav-toggle" class="nav-hamburger">
+            <i class="fa fa-bars"></i>
+        </label>
+
+        <!-- Nav links -->
+        <div class="nav-links">
+            <a href="#hero">Home</a>
+            <a href="#menu">Menu</a>
+            <a href="#about">About Us</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <!-- Hero Content-->
+            <div class="hero-content">
+                <h1><span class="title-box">Poke Bowl</span></h1>
+            </div>
+    </section>
+
+    <!-- Menu Section-->
+    <section id="menu">
+        <div class="container">
+            <h2>Our Menu</h2>
+            <table class="menu-table" >
+                <thead>
+                    <tr>
+                        <th scope="col">Item</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Classic Poke Bowl</td>
+                        <td>Salmon, rice, greens, house sauce</td>
+                        <td>$10.99</td>
+                    </tr>
+                    <tr>
+                        <td>Spicy Tuna Bowl</td>
+                        <td>Tuna, spicy mayo, cucumber</td>
+                        <td>$11.99</td>
+                    </tr>
+                    <tr>
+                        <td>Veggie Bowl</td>
+                        <td>Tofu, avocado, mixed veggies</td>
+                        <td>$9.99</td>
+                    </tr>
+                    <tr>
+                        <td>Chips &amp; Salsa</td>
+                        <td>Crispy chips with fresh salsa</td>
+                        <td>$3.50</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <h2>Gallery</h2>
+
+        <div class="gallery-container">
+            <img src="images/sample1.png" alt="Sample Poke Bowl 1">
+            <img src="images/sample2.png" alt="Sample Poke Bowl 2">
+            <img src="images/sample3.png" alt="Sample Poke Bowl 3">
+            <img src="images/sample4.png" alt="Sample Poke Bowl 4">
+            <img src="images/sample5.png" alt="Sample Poke Bowl 5">
+            <img src="images/sample6.png" alt="Sample Poke Bowl 6">
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Us</h2>
+        <div class="container">
+
+            <p>Founded in 2016 by a pair of friends who missed the bright, simple flavors of the Hawaiian coast, Poke Bowl started as a tiny weekend stall and quickly grew into the neighborhood spot it is today. Our mission is the same now as on day one: serve honest, seasonal food that feels both fresh and familiar. Try our Park Ave Classic—soy-citrus salmon, house pickles, and sesame-scallion rice—which became a local favorite the first week we opened. We source responsibly, support local farmers, and cook with a lot of heart.</p>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="contact">
+        <h2>Our Location</h2>
+        <div class="container">
+            
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6043.470822793999!2d-73.96710402449877!3d40.76784383419581!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c258eb899f0889%3A0xb5e90aa7d877ee1f!2sHunter%20College!5e0!3m2!1sen!2sus!4v1759794924876!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <section id="contact-form">
+                <h2>Contact / Reservation</h2>
+
+                <form action="https://formspree.io/f/your-form-id" method="POST">
+                    <label for="name">Full name</label>
+                    <input id="name" name="name" type="text" required>
+
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" required>
+
+                    <label for="phone">Phone</label>
+                    <input id="phone" name="phone" type="tel">
+
+                    <label for="date">Reservation date</label>
+                    <input id="date" name="date" type="date">
+
+                    <label for="people">Party size</label>
+                    <input id="people" name="people" type="number" min="1" max="20" value="2" required>
+
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+
+                    <button type="submit">Send</button>
+                </form>
+            </section>
+        </div>
+        
+    </section>
+   
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter">Twitter</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Business Hours</h3>
+                <p>Monday - Friday: 11:00 AM - 9:00 PM</p>
+                <p>Saturday: 12:00 PM - 10:00 PM</p>
+                <p>Sunday: 12:00 PM - 8:00 PM</p>
+            </div>
+        </div>
+
+        <p class="footer-copyright">&copy; 2025 Poke Bowl. All rights reserved.</p>
+    </footer>
+
+
+</body>
+</html>
