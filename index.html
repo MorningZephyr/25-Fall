@@ -27,6 +27,12 @@
             <a href="#about">About Us</a>
             <a href="#contact">Contact</a>
         </div>
+
+        <!-- Shopping Cart Icon -->
+        <button id="cart-btn" class="cart-button" aria-label="Shopping Cart">
+            <i class="fa fa-shopping-cart"></i>
+            <span id="cart-count" class="cart-count">0</span>
+        </button>
     </nav>
 
     <!-- Hero Section -->
@@ -47,6 +53,7 @@
                         <th scope="col">Item</th>
                         <th scope="col">Description</th>
                         <th scope="col">Price</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,21 +61,49 @@
                         <td>Classic Poke Bowl</td>
                         <td>Salmon, rice, greens, house sauce</td>
                         <td>$10.99</td>
+                        <td>
+                            <button class="add-to-cart-btn" 
+                                    data-name="Classic Poke Bowl" 
+                                    data-price="10.99">
+                                Add to Cart
+                            </button>
+                        </td>
                     </tr>
                     <tr>
                         <td>Spicy Tuna Bowl</td>
                         <td>Tuna, spicy mayo, cucumber</td>
                         <td>$11.99</td>
+                        <td>
+                            <button class="add-to-cart-btn" 
+                                    data-name="Spicy Tuna Bowl" 
+                                    data-price="11.99">
+                                Add to Cart
+                            </button>
+                        </td>
                     </tr>
                     <tr>
                         <td>Veggie Bowl</td>
                         <td>Tofu, avocado, mixed veggies</td>
                         <td>$9.99</td>
+                        <td>
+                            <button class="add-to-cart-btn" 
+                                    data-name="Veggie Bowl" 
+                                    data-price="9.99">
+                                Add to Cart
+                            </button>
+                        </td>
                     </tr>
                     <tr>
                         <td>Chips &amp; Salsa</td>
                         <td>Crispy chips with fresh salsa</td>
                         <td>$3.50</td>
+                        <td>
+                            <button class="add-to-cart-btn" 
+                                    data-name="Chips & Salsa" 
+                                    data-price="3.50">
+                                Add to Cart
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -157,6 +192,29 @@
         <p class="footer-copyright">&copy; 2025 Poke Bowl. All rights reserved.</p>
     </footer>
 
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-modal-content">
+            <div class="cart-header">
+                <h2>Shopping Cart</h2>
+                <button id="close-cart" class="close-cart-btn">&times;</button>
+            </div>
+            
+            <div id="cart-items" class="cart-items">
+                <!-- Cart items will be dynamically added here -->
+            </div>
 
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <strong>Total:</strong>
+                    <span id="cart-total">$0.00</span>
+                </div>
+                <button id="clear-cart" class="clear-cart-btn">Clear Cart</button>
+                <button class="checkout-btn">Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="cart.js"></script>
 </body>
 </html>
