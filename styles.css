@@ -84,7 +84,7 @@ a {
 
 /* Hero area */
 #hero {
-    background-image: url('images/hero_img.jpg');
+    background-image: url('/images/hero_img.jpg');
     background-size: cover;        /* ensure the image fills the area */
     background-repeat: no-repeat;
     min-height: 85vh;              /* visible hero area even with no inner content */

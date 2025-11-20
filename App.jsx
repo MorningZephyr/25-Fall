@@ -43,7 +43,7 @@ function App() {
       {/* Navigation */}
       <nav>
         <a className="nav-logo" href="#hero">
-          <img src="images/logo.png" alt="Poke Bowl logo" />
+          <img src="/images/logo.png" alt="Poke Bowl logo" />
         </a>
 
         <input 
@@ -115,7 +115,7 @@ function App() {
           {[1, 2, 3, 4, 5, 6].map(num => (
             <img 
               key={num}
-              src={`images/sample${num}.png`} 
+              src={`/images/sample${num}.png`} 
               alt={`Sample Poke Bowl ${num}`} 
             />
           ))}
