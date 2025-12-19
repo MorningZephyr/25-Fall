@@ -1,19 +1,48 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import MenuItem from './components/MenuItem';
 import CartItem from './components/CartItem';
 import './styles.css';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 function App() {
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [menuItems, setMenuItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [orderStatus, setOrderStatus] = useState(null);
 
-  const menuItems = [
-    { name: 'Classic Poke Bowl', description: 'Salmon, rice, greens, house sauce', price: 10.99 },
-    { name: 'Spicy Tuna Bowl', description: 'Tuna, spicy mayo, cucumber', price: 11.99 },
-    { name: 'Veggie Bowl', description: 'Tofu, avocado, mixed veggies', price: 9.99 },
-    { name: 'Chips & Salsa', description: 'Crispy chips with fresh salsa', price: 3.50 }
-  ];
+  // Fetch menu items from backend
+  useEffect(() => {
+    fetchMenuItems();
+  }, []);
+
+  const fetchMenuItems = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${API_URL}/menu`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch menu items');
+      }
+      const data = await response.json();
+      setMenuItems(data);
+      setError(null);
+    } catch (err) {
+      console.error('Error fetching menu:', err);
+      setError('Unable to load menu. Please try again later.');
+      // Fallback to local data if API fails
+      setMenuItems([
+        { name: 'Classic Poke Bowl', description: 'Salmon, rice, greens, house sauce', price: 10.99 },
+        { name: 'Spicy Tuna Bowl', description: 'Tuna, spicy mayo, cucumber', price: 11.99 },
+        { name: 'Veggie Bowl', description: 'Tofu, avocado, mixed veggies', price: 9.99 },
+        { name: 'Chips & Salsa', description: 'Crispy chips with fresh salsa', price: 3.50 }
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const addToCart = (name, price) => {
     setCart(prevCart => {
@@ -33,6 +62,58 @@ function App() {
 
   const clearCart = () => {
     setCart([]);
+    setOrderStatus(null);
+  };
+
+  const handleCheckout = async () => {
+    if (cart.length === 0) {
+      alert('Your cart is empty!');
+      return;
+    }
+
+    try {
+      const orderData = {
+        items: cart,
+        totalPrice: totalPrice,
+        totalItems: totalItems,
+        orderDate: new Date()
+      };
+
+      const response = await fetch(`${API_URL}/orders`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to place order');
+      }
+
+      const result = await response.json();
+      console.log('Order placed:', result);
+      
+      setOrderStatus({
+        success: true,
+        message: 'Order placed successfully! Thank you for your order.',
+        orderId: result.order._id
+      });
+      
+      // Clear cart after successful order
+      setTimeout(() => {
+        setCart([]);
+        setOrderStatus(null);
+        setIsCartOpen(false);
+      }, 3000);
+
+    } catch (err) {
+      console.error('Error placing order:', err);
+      setOrderStatus({
+        success: false,
+        message: 'Failed to place order. Please try again.'
+      });
+    }
   };
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -86,25 +167,31 @@ function App() {
       <section id="menu">
         <div className="container">
           <h2>Our Menu</h2>
-          <table className="menu-table">
-            <thead>
-              <tr>
-                <th scope="col">Item</th>
-                <th scope="col">Description</th>
-                <th scope="col">Price</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {menuItems.map((item, index) => (
-                <MenuItem 
-                  key={index} 
-                  item={item} 
-                  onAddToCart={addToCart} 
-                />
-              ))}
-            </tbody>
-          </table>
+          {loading ? (
+            <p style={{ textAlign: 'center', padding: '2rem' }}>Loading menu...</p>
+          ) : error ? (
+            <p style={{ textAlign: 'center', padding: '2rem', color: '#ff6b6b' }}>{error}</p>
+          ) : (
+            <table className="menu-table">
+              <thead>
+                <tr>
+                  <th scope="col">Item</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {menuItems.map((item, index) => (
+                  <MenuItem 
+                    key={item._id || index} 
+                    item={item} 
+                    onAddToCart={addToCart} 
+                  />
+                ))}
+              </tbody>
+            </table>
+          )}
         </div>
       </section>
 
@@ -214,6 +301,16 @@ function App() {
             </div>
             
             <div className="cart-items">
+              {orderStatus && (
+                <div className={`order-status ${orderStatus.success ? 'success' : 'error'}`}>
+                  {orderStatus.message}
+                  {orderStatus.orderId && (
+                    <p style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>
+                      Order ID: {orderStatus.orderId}
+                    </p>
+                  )}
+                </div>
+              )}
               {cart.length === 0 ? (
                 <p className="cart-empty">Your cart is empty</p>
               ) : (
@@ -235,7 +332,13 @@ function App() {
               <button className="clear-cart-btn" onClick={clearCart}>
                 Clear Cart
               </button>
-              <button className="checkout-btn">Checkout</button>
+              <button 
+                className="checkout-btn" 
+                onClick={handleCheckout}
+                disabled={cart.length === 0}
+              >
+                Checkout
+              </button>
             </div>
           </div>
         </div>
