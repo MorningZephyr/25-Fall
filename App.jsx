@@ -32,13 +32,7 @@ function App() {
     } catch (err) {
       console.error('Error fetching menu:', err);
       setError('Unable to load menu. Please try again later.');
-      // Fallback to local data if API fails
-      setMenuItems([
-        { name: 'Classic Poke Bowl', description: 'Salmon, rice, greens, house sauce', price: 10.99 },
-        { name: 'Spicy Tuna Bowl', description: 'Tuna, spicy mayo, cucumber', price: 11.99 },
-        { name: 'Veggie Bowl', description: 'Tofu, avocado, mixed veggies', price: 9.99 },
-        { name: 'Chips & Salsa', description: 'Crispy chips with fresh salsa', price: 3.50 }
-      ]);
+      setMenuItems([]);
     } finally {
       setLoading(false);
     }
